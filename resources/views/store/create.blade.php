@@ -45,4 +45,7 @@
         $imgPreview.src = objectURL;
     }
 </script>
+<script>
+    //location script
+</script>
 @stop
