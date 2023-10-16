@@ -13,7 +13,6 @@ class FileStorage extends Controller
     public static function upload($file,$filename,$folder_path){
         $file_name=$file->getClientOriginalName();
         $extension=pathInfo($file_name,PATHINFO_BASENAME);
-        dd($extension);
         $imageName='_'.time().'_'.$extension;
 
         $file->move(public_path($folder_path),$imageName);
