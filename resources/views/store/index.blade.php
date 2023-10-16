@@ -12,7 +12,7 @@
         <form class="row" action="{{route('stores.index')}}" method="GET">
             @csrf
             <div class="col-md-4">
-                <h3>Listado de categorías</h3>
+                <h3>Listado de Alamacenes</h3>
             </div>
 
             <div class="col-md-8">
@@ -24,7 +24,7 @@
 
         </form>
         @include('layouts.alerts')
-        <a href="{{ route('categories.create') }}" class="btn btn-primary btn-sm float-right">Crear Nueva Categoría</a>
+        <a href="{{ route('stores.create') }}" class="btn btn-primary btn-sm float-right">Crear Nueva Categoría</a>
         <table class="table table-striped">
             <thead>
                 <tr>
@@ -39,26 +39,18 @@
                 @php
                     $i = 1;
                 @endphp
-                @foreach($categories as $category)
+                @foreach($stores as $store)
                     <tr>
                         <td>{{ $i++ }}</td>
                         <td>
-                            <span>{{ $category->title }}</span><br>
-                            <small class="text-secondary">{{ $category->slug }}</small>
+                            <span></span><br>
+                            <small class="text-secondary">{{ $store->slug }}</small>
                         </td>
+                      
                         <td>
-                            @if ($category->icon)
-                                <img src="{{$category->icon}}" alt="" height="40">
-                            @else
-                                <img src="https://e7.pngegg.com/pngimages/854/638/png-clipart-computer-icons-preview-batch-miscellaneous-angle-thumbnail.png" alt="" height="40">
-                            @endif
-                        </td>
-                        <td>
-                            <span style="color:{{$category->color}}">{{ $category->color }}</span> </td>
-                        <td>
-                            <a href="{{ route('categories.show', $category->id) }}" class="btn btn-info"><i class='bx bx-show'></i></a>
-                            <a href="{{ route('categories.edit', $category->id) }}" class="btn btn-primary"><i class='bx bx-edit-alt' ></i></a>
-                            <form action="{{ route('categories.destroy', $category->id) }}" method="POST" style="display: inline;">
+                            <a href="{{ route('stores.show', $store->id) }}" class="btn btn-info"><i class='bx bx-show'></i></a>
+                            <a href="{{ route('stores.edit', $store->id) }}" class="btn btn-primary"><i class='bx bx-edit-alt' ></i></a>
+                            <form action="{{ route('stores.destroy', $store->id) }}" method="POST" style="display: inline;">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-danger btn-submit" onclick="return confirm('¿Estás seguro de eliminar esta categoría?')"><i class='bx bx-trash' ></i></button>
@@ -68,11 +60,6 @@
                 @endforeach
             </tbody>
         </table>
-
-        <div class="d-flex">
-            {!! $categories->links() !!}
-        </div>
-
     </div>
 </div>
 

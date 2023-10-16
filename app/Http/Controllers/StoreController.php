@@ -12,9 +12,15 @@ class StoreController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    private const FOLDER_PATH_LOCAL = 'img/stores';
+    public function index(Request $request)
     {
-        return view ('store.index');
+        
+        $search = $request->search;
+        $stores = Store::where('name','LIKE','%'.$request->search.'%')
+            ->latest('id')
+            ->paginate(8);
+        return view('store.index', compact('stores', 'search'));
     }
 
     /**
@@ -35,7 +41,21 @@ class StoreController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $store = Store::create([
+            'name' => $request->name,
+            'slug' => $request->slug,
+            'description'=>$request->description,
+            'location'=>$request->location,
+            'nit'=>$request->nit,
+            'status'=>$request->status
+        ]);
+        $front_page  = $request->file('front_page');
+        if ($front_page) {
+            $imageName = FileStorage::upload($front_page, $front_page->getClientOriginalName(), $this::FOLDER_PATH_LOCAL);
+            $store->front_page = $imageName;
+            $store->save();
+        }
+        return redirect()->route('stores.index')->with('success', 'Categoría creada con éxito.');
     }
 
     /**

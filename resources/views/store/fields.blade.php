@@ -41,7 +41,7 @@
         <div class="col-md-12 text-center">
             <label><strong>Imagen:</strong></label>
 
-            <input type="file" accept="image/*" name="front-page" onchange="previewImage(event, '#imgPreview')">
+            <input type="file" accept="image/*" name="front_page" onchange="previewImage(event, '#imgPreview')">
             <img class="mt-3" id="imgPreview" src="{!! old(
                 'icon',
                 $category->icon ??
