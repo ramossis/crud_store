@@ -100,6 +100,9 @@ class StoreController extends Controller
      */
     public function destroy(Store $store)
     {
-        //
+        FileStorage::delete($store->front_page,$this::FOLDER_PATH_LOCAL);
+        $store->delete();
+
+        return redirect()->route('stores.index')->with('success','Almacen eleminado con exito');
     }
 }

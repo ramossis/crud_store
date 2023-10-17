@@ -20,7 +20,7 @@
     <form method="POST" action="{{ route('stores.store') }}" autocomplete="off" enctype="multipart/form-data">
         @csrf
         @include('store.fields')
-        <button type="submit" class="btn btn-primary btn-submit">Crear Categoría</button>
+        <button type="submit" class="btn btn-primary btn-submit">Crear Almacen</button>
     </form>
 </div>
 @endsection
@@ -47,5 +47,25 @@
 </script>
 <script>
     //location script
+        const $button = document.getElementById('_button');
+        const $locationInput = document.getElementById("location");
+
+        $button.addEventListener('click', function() {
+            getlocation();
+        });
+
+        function getlocation() {
+            // Callbacks
+            const successCallback = (position) => {
+                // Set inputs values
+                $locationInput.value = position.coords.latitude+','+position.coords.longitude;
+            };
+            // Manage error messages
+            const errorCallback = (error) => {
+                alert(error.code + ' : ' + error.message);
+            };
+            // Call
+            navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
+        }
 </script>
 @stop

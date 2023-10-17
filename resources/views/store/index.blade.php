@@ -17,21 +17,24 @@
 
             <div class="col-md-8">
                 <div class="input-group ">
-                    <input type="search" name="search" value="{!!old('search', $search ?? '')!!}" class="form-control" placeholder="Buscar noticias...">
+                    <input type="search" name="search" value="{!!old('search', $search ?? '')!!}" class="form-control" placeholder="Buscar Almacen...">
                     <button class="btn btn-dark btn-sm"> <i class='bx bx-search-alt-2'></i> Buscar</button>
                 </div>
             </div>
 
         </form>
         @include('layouts.alerts')
-        <a href="{{ route('stores.create') }}" class="btn btn-primary btn-sm float-right">Crear Nueva Categoría</a>
+        <a href="{{ route('stores.create') }}" class="btn btn-primary btn-sm float-right">Crear Nuevo Almacen</a>
         <table class="table table-striped">
             <thead>
                 <tr>
                     <th>ID</th>
-                    <th>Título</th>
-                    <th>Icono</th>
-                    <th>Color</th>
+                    <th>Nombre</th>
+                    <th>Imagen</th>
+                    <th>Descripcion</th>
+                    <th>Ubicacion</th>
+                    <th>NIT</th>
+                    <th>Estado</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
@@ -43,8 +46,33 @@
                     <tr>
                         <td>{{ $i++ }}</td>
                         <td>
-                            <span></span><br>
+                            <span>{{$store->name}}</span><br>
                             <small class="text-secondary">{{ $store->slug }}</small>
+                        </td>
+                        <td>
+                            @if ($store->front_page)
+                                    <img src="{{$store->front_page}}" alt="" height="40">
+                                @else
+                                    <img src="https://e7.pngegg.com/pngimages/854/638/png-clipart-computer-icons-preview-batch-miscellaneous-angle-thumbnail.png" alt="" height="40">
+                                @endif
+                        </td>
+                        <td>
+                            <span>
+                                {{$store->description}}
+                            </span>
+                        </td>
+                        <td>
+                            <span>
+                                {{$store->location}}
+                            </span>
+                        </td>
+                        <td>
+                            <span>
+                                {{$store->nit}}
+                            </span>
+                        </td>
+                        <td>
+                            {{$store->status}}
                         </td>
                       
                         <td>
