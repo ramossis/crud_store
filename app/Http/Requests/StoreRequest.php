@@ -25,10 +25,10 @@ class StoreRequest extends FormRequest
     {
         return [
         'name'=>'required|string|max:250',
-        'front_page'=>'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+        'front_page'=>'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         'description'=>'nullable',
         'location'=>'required',
-        'nit'=>'required|number|',
+        'nit'=>'required',
         'status'=>'required|string|max:250'
         ];
     }

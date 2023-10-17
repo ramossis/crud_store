@@ -78,7 +78,7 @@ class StoreController extends Controller
      */
     public function edit(Store $store)
     {
-        //
+        return view('store.edit',compact('store'));
     }
 
     /**
@@ -88,9 +88,17 @@ class StoreController extends Controller
      * @param  \App\Models\Store  $store
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Store $store)
+    public function update(StoreRequest $request, Store $store)
     {
-        //
+        $store->update($request->all());
+        $front_page=$request->file('front_page');
+        if($front_page){
+            FileStorage::delete($store->front_page,$this::FOLDER_PATH_LOCAL);
+            $imageName=FileStorage::upload($front_page,$front_page->getClientOriginalName(),$this::FOLDER_PATH_LOCAL);
+            $store->front_page=$imageName;
+        }
+        $store->save();
+        return redirect()->route('stores.index')->with('success','Almacen Actualizado con Exito');
     }
 
     /**
