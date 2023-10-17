@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Store;
+use App\Http\Requests\StoreRequest;
 use Illuminate\Http\Request;
 
 class StoreController extends Controller
@@ -39,7 +40,7 @@ class StoreController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreRequest $request)
     {
         $store = Store::create([
             'name' => $request->name,
@@ -66,7 +67,7 @@ class StoreController extends Controller
      */
     public function show(Store $store)
     {
-        //
+        return view('store.show',compact('store'));
     }
 
     /**
